@@ -8,7 +8,8 @@ void echo(int connfd)
 
     Rio_readinitb(&rio, connfd);
     while((n = Rio_readlineb(&rio, buf, MAXLINE)) != 0) {
-        printf("server received %d bytes\n", (int)n);
-        Rio_writen(connfd, buf, n);
+        Fputs(buf, stdout);
+        Fgets(buf, MAXLINE, stdin);
+        Rio_writen(connfd, buf, strlen(buf));
     }
 }
